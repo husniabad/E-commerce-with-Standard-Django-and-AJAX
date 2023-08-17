@@ -1,0 +1,131 @@
+{% extends 'app/base.html' %} {% load static %}
+<br />
+{% block title %}Caregory {% endblock title %} {% block main-content %}
+<div class="container">
+  <div class="row flex justify-content-between">
+    <div class="img2 col-lg-5 mt-5">
+      <img
+        src="{{ product.product_image.url}}"
+        class="image col-xs-6 col-sm-12 col-lg-12 mt-3 text-sm-center w-100 h-75"
+        alt="{{product.title}}" />
+    </div>
+    <div class="productdetail col-lg-5">
+      <h1 style="font-family: Georgia; font-size: 50px">{{product.title}}</h1>
+      <h5 class="text-success fw-bold">RS. {{product.discounted_price}}/-</h5>
+      <p class="fs-5 flex">
+        <small class="text-decoration-line-through text-muted"
+          >Rs. {{product.selling_price}}/-</small
+        ><small class="text-danger"> ({{percentage_off}}% off)</small>
+      </p>
+      <br /><br />
+      <h4>Product Featres</h4>
+      <ul
+        class="fs-5"
+        style="font-family: Rajdhani">
+        <li>{{product.description}}</li>
+      </ul>
+
+      <hr />
+      <div class="d-flex">
+        <div
+          class="input-group"
+          style="width: 130px">
+          <button
+            type="button"
+            class="minus-cart minus-cart-{{product.id}} btn btn-danger btn-number rounded-left"
+            pid="{{product.id}}">
+            <span class="fas fa-minus"></span>
+          </button>
+
+          {% comment %}
+          <input
+            type="text"
+            id="quantity"
+            name="quantity"
+            class="form-control"
+            value="{{cart_item.quantity}}"
+            min="1"
+            max="100" />
+          {% endcomment %}
+          <span
+            id="quantityCounter-{{product.id}}"
+            class="text-black quantityCounter-{{product.id}}"
+            style="
+              background-color: #f1f1f1;
+              font-weight: bold;
+              display: inline-block;
+              width: 20%;
+              text-align: center;
+              align-items: center;
+              justify-content: center;
+            "
+            >{{cart_item.quantity|default:0}}</span
+          >
+
+          <button
+            type="button"
+            quantity="{{cart_item.quantity|default:0 }}"
+            class="plus-cart plus-cart-{{product.id}} btn btn-success btn-number rounded-right"
+            pid="{{product.id}}">
+            <span class="fas fa-plus"></span>
+          </button>
+        </div>
+
+        <div style="width: 130px">
+          <button
+            quantity="{{cart_item.quantity|default:0 }}"
+            pid="{{product.id}}"
+            class="add-to-cart add-to-cart-{{product.id}} btn btn-success shadow"
+            style="font-size: 90%; height: 100%">
+            Add To Cart
+          </button>
+        </div>
+        <!-- Show the "Add to Cart" button if the product is not in the cart -->
+        {% comment %}
+        <form
+          action="/add-to-cart"
+          class="d-inline">
+          <input
+            type="hidden"
+            name="prod_id"
+            value="{{ product.id }}" />
+          <button
+            type="submit"
+            class="btn btn-success shadow px-5 py-2">
+            Add to Cart
+          </button>
+        </form>
+        {% endcomment %}
+
+        <a
+          href="{% url 'showcart' %}"
+          class="btn btn-warning shadow px-5 py-2 ms-4"
+          >Buy Now
+        </a>
+      </div>
+      {% if wishlist %}
+
+      <a
+        pid="{{product.id}}"
+        class="minus-wishlist btn btn-lg px-3 py-2 ms-4"
+        ><i
+          class="fas fa-heart fa-lg"
+          style="color: #ff0000"></i
+      ></a>
+
+      {% else %}
+
+      <a
+        pid="{{product.id}}"
+        class="plus-wishlist btn btn-lg px-3 py-2 ms-4"
+        ><i
+          class="far fa-heart fa-lg"
+          style="color: #ff0000"></i
+      ></a>
+
+      {% endif %}
+    </div>
+  </div>
+</div>
+<br /><br /><br /><br />
+{% endblock main-content %}

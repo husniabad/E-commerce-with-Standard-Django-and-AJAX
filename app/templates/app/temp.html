@@ -1,0 +1,17 @@
+{% if wishlist %}
+      <a
+        pid="{{ product.id }}"
+        class="wishlist-btn minus-wishlist btn btn-lg px-3 py-2 ms-4 active">
+        <i
+          class="fas fa-heart fa-lg"
+          style="color: #ff0000"></i>
+      </a>
+      {% else %}
+      <a
+        pid="{{ product.id }}"
+        class="wishlist-btn plus-wishlist btn btn-lg px-3 py-2 ms-4">
+        <i
+          class="far fa-heart fa-lg"
+          style="color: #ff0000"></i>
+      </a>
+      {% endif %}

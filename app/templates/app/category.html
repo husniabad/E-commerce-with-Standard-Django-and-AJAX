@@ -1,0 +1,81 @@
+{% extends 'app/base.html' %} {% load static %}
+<br />
+{% block title %}Caregory {% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="list-group">
+        {% for val in title %}
+        <a
+            href="{% url 'category-title' val.title %}"
+            class="list-group-item list-group-item-action"
+            area-current="true"
+            >{{val.title}}</a>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="col-sm-9">
+      <div class="row">
+        {% for prod in product %}
+                <div class="col-3 text-center offset-1 mb-4">
+                  <a href="{% url "product-detail" prod.id %}" class="btn">
+                      <div>
+                      <img src="{{ prod.product_image.url}}" width="300px" height="200px" />
+                      <div class="fw-bold"> {{prod.title}} </div>
+                      <div class="fw-bold text-success">RS.{{prod.discounted_price}}/- 
+                          <small class="fw-light text-dark text-decoration-line-through"> {{prod.selling_price}} </small><small class="text-danger"> ({{prod.percentage_off}}% off)</small>
+                      </div>
+                  </a>
+               
+             <div class="row align-items-center">
+              <div class="col-sm-3 offset-sm-4 ">
+              <form
+              action="/add-to-cart"
+              class="d-inline">
+              <input
+                type="hidden"
+                name="prod_id"
+                value="{{prod.id}}" />
+              <button
+                type="submit"
+                class="btn btn-success btn-sm shadow fw-bold  " >
+               Add
+              </button>
+            </form>
+          </div>
+            <div class="col-sm-3 " >
+              
+            <a
+              href="{% url 'showcart' %}"
+              class="btn btn-warning btn-sm shadow fw-bold" 
+              >Buy
+            </a>
+          </div>
+          <div class="col-2">
+          {% if prod.wishlist %}
+          <a
+            pid="{{prod.id}}"
+            class="minus-wishlist btn btn-lg "
+            ><i
+              class="fas fa-heart "
+              style="color: #ff0000"></i
+          ></a>
+          {% else %}
+          <a
+            pid="{{prod.id}}"
+            class="plus-wishlist btn btn-lg "
+            ><i
+              class="far fa-heart "
+              style="color: #ff0000"></i
+          ></a>
+          {% endif %}
+          </div>
+          </div>
+    </div>
+  </div>
+          {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock main-content %}

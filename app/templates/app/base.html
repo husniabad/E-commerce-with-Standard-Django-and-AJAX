@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="X-UA-Compatible"
+      content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous" />
+    <link
+      rel="stylesheet"
+      href="{%  static 'app/css/owl.carousel.min.css' %}" />
+    <link
+      rel="stylesheet"
+      href="{%  static 'app/css/all.min.css' %}" />
+    <link
+      rel="stylesheet"
+      href="{%  static 'app/css/style.css' %}" />
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <title>
+      Dairy Products | {% block title %}{% endblock title %} Document
+    </title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+      <div class="container-fluid">
+        <a
+          class="navbar-brand text-warning fw-bold fs-3"
+          href="/">
+          {% comment %} <img
+            src="{% static 'app/images/Neel.png' %}"
+            width="50"
+            height="50" /> {% endcomment %}
+            <div class=" fw-bold" style="word-spacing: -0.2em;">
+
+            <span class="text-info">S</span>
+            <span class="text-warning">c</span>
+            <span class="text-info ">r</span>
+            <span class="text-danger">a</span>
+            <span class="text-info">p</span>
+          </div>
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div
+          class="collapse navbar-collapse"
+          id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="/"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Products
+              </a>
+              <ul
+                class="dropdown-menu"
+                aria-labelledby="navbarDropdown">
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="{% url 'category' 'ML' %}"
+                    >Milk</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="{% url 'category' 'CR' %}"
+                    >Curd</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="{% url 'category' 'MS' %}"
+                    >Milkshake</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="{% url 'category' 'LS' %}"
+                    >Lassi</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="{% url 'category' 'GH' %}"
+                    >Ghee</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="{% url 'category' 'PN' %}"
+                    >Paneer</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="{% url 'category' 'CZ' %}"
+                    >Cheese</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="{% url 'category' 'IC' %}"
+                    >Ice-Creams</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link text-white"
+                href="{% url 'about' %}"
+                >About Us</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link text-white"
+                href="{% url 'contact' %}"
+                >Contact Us</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link text-warning fw-bold"
+                href="{% url 'home2' %}"
+                >Test page</a
+              >
+            </li>
+          </ul>
+          <form class="d-flex">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search" />
+            <button
+              class="btn btn-outline-success text-white border-light rounded-pill"
+              type="submit">
+              Search
+            </button>
+          </form>
+        </div>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          {% if request.user.is_authenticated %}
+          <li class="nav-item dropdown mx-2">
+            <a
+              class="nav-link dropdown-toggle text-white text-capitalize"
+              href="#"
+              id="profileDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              area-expanded="false">
+              {{request.user}}
+            </a>
+            <ul
+              class="dropdown-menu"
+              area-labelledby="profileDropdown">
+              <li>
+                <a
+                  class="dropdown-item"
+                  href="{%url 'profile' %}">
+                  Profile
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  href="{% url 'orders' %}">
+                  Orders
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  href="{% url 'passwordchange'%}">
+                  Change Password
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  href="{% url 'logout' %}">
+                  Logout
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item mx-2">
+            <a
+              href="{% url 'showcart' %}"
+              class="   nav-link text-white">
+              Cart
+              {% if total_quantity > 0 %}
+              <span
+                class="badge rounded-pill  bg-danger">
+               {{total_quantity}}
+              </span>{% endif %}
+            </a>
+          </li>
+          <li class="nav-item mx-2">
+            <a
+              href="#"
+              class="nav-link text-white">
+              Wishlist 
+              {% if wishitem > 0 %}
+              <span
+                class="badge rounded-pill  bg-danger">
+               {{wishitem}}
+              </span>{% endif %}
+            </a>
+          </li>
+          {% else %}
+          <li class="nav-item mx-2">
+            <a
+              href="{% url 'login' %}"
+              class="nav-link text-white">
+              Login
+            </a>
+          </li>
+          <li class="nav-item mx-2">
+            <a
+              href="{% url 'customerregistration' %}"
+              class="nav-link text-white">
+              Register
+            </a>
+          </li>
+          {%endif%}
+        </ul>
+      </div>
+    </nav>
+    {% block banner-slider %}{% endblock banner-slider %}
+    <br />
+    {% block information %}{% endblock information %}
+    <br />
+    {% block main-content %}{% endblock main-content %} 
+  </br />
+    {% block payment-gateway%}
+    {% endblock payment-gateway %}
+
+    <footer
+      class="container-fluid bg-success text-center p-2 mt-5 fixed-bottom">
+      Copyright
+    </footer>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+      integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+      crossorigin="anonymous"></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+      integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+      crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <script src="{% static 'app/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'app/js/all.min.js' %}"></script>
+    <script src="{% static 'app/js/myscript.js' %}"></script>
+  </body>
+</html>
